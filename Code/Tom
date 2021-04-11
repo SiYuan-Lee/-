@@ -1,0 +1,14 @@
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        return dfs(root,0);//不要有重复判断
+    }
+    public int dfs(TreeNode root,int preNum){
+        if(root==null) return 0;
+        int sum=root.val+preNum*10;
+        if(root.left==null&&root.right==null){
+            return sum;//碰到叶子结点
+        }else{
+            return dfs(root.left,sum)+dfs(root.right,sum);//深度遍历
+        }
+    }
+}
