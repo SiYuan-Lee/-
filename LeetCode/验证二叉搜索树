@@ -1,0 +1,40 @@
+ ```java
+ /**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}//无参
+ *     TreeNode(int val) { this.val = val; }//单个参数
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }//三个参数
+ * }
+ */
+ //中序遍历递归版本，还可以用中序遍历非递归（栈） ，直接传参递归解决
+class Solution {
+    boolean isValid=true;
+    boolean flag=true;
+    int pre=Integer.MIN_VALUE,cur;//改成long，就可以不用flag了
+    public void dfs(TreeNode root){
+        if(root == null) return;      
+        dfs(root.left);
+        cur=root.val;
+        if(!flag){
+            if(pre>=cur){
+                isValid=false;
+            }
+        }
+        flag=false;
+        pre=cur;
+        dfs(root.right);      
+    }
+    public boolean isValidBST(TreeNode root) {
+        dfs(root);
+        return isValid;
+    }
+}
+```
